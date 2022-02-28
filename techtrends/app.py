@@ -1,5 +1,5 @@
 import sqlite3
-import logging
+from logging import DEBUG
 from flask import (
     Flask,
     jsonify,
@@ -14,9 +14,10 @@ from werkzeug.exceptions import abort
 from middleware import AppLogger
 
 
-logger = AppLogger(name="app", level=10)
+logger = AppLogger(name="app", level=DEBUG)
 
 
+# Decorate db handlers to keep track 
 @logger.increment("db_connection_count")
 def get_db_connection():
     connection = sqlite3.connect('database.db')
@@ -53,17 +54,16 @@ def get_post_count() -> int:
     return len(post_count)
 
 
-logger.set_post_count(count=get_post_count())
 
-
-def create_flask_instance() -> Flask:
+def create_flask_instance(logger: AppLogger) -> Flask:
     app = Flask(__name__)
     app.config["SECRET_KEY"] = uuid.uuid4().hex
+    logger.set_post_count(count=get_post_count())
     app.logger = logger.logger
     return app
 
 
-app = create_flask_instance()
+app = create_flask_instance(logger)
 
 
 @app.route("/")
@@ -120,6 +120,7 @@ def metrics() -> dict:
         "db_connection_count": logger.db_connection_count,
         "post_count": logger.post_count
     }), 200
+
 
 
 if __name__ == "__main__":
