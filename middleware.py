@@ -38,10 +38,10 @@ class AppLogger:
             def wrapped_func(*args, **kwargs):
                 res = func(*args, **kwargs)
                 try:
-                    for field in fields:
+                    for f in fields:
                         self.__setattr__(
-                            str(field),
-                            int(getattr(self, field)) + 1
+                            str(f),
+                            int(getattr(self, f)) + 1
                         )
                 except AttributeError as e:
                     self.logger.warning(f"{e.args}")
