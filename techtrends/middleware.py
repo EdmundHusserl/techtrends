@@ -8,6 +8,11 @@ from dataclasses import (
 
 @dataclass
 class AppLogger:
+    """
+    Logging middleware instance used as an arg for application factory.
+    increment method allows to decorate DB handlers to keep track of posts 
+        and connections count. 
+    """
     name: str
     level: int
     post_count: int = 0
