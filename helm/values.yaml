@@ -12,10 +12,10 @@ image:
 replicaCount: 1
 resources:
   requests:
-    memory: 64mi
+    memory: 64Mi
     cpu: 250m
   limits: 
-    memory: 128mi
+    memory: 128Mi
     cpu: 500m
 containerPort: 3111
 livenessProbe:
