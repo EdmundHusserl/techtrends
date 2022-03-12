@@ -4,7 +4,10 @@ from dataclasses import (
     dataclass,
     field
 )
-
+from sys import (
+    stdout, 
+    stderr
+)
 
 @dataclass
 class AppLogger:
@@ -26,14 +29,17 @@ class AppLogger:
         logger = logging.getLogger(name)
         logger.setLevel(level)
 
-        ch = logging.StreamHandler()
-        ch.setLevel(level)
-
         formatter = logging.Formatter(
             "%(name)s %(levelname)s %(asctime)s %(message)s"
         )
-        ch.setFormatter(formatter)
-        logger.addHandler(ch)
+        
+        stdout_handler = logging.StreamHandler(stdout)
+        stderr_handler = logging.StreamHandler(stderr)
+        
+        for handler in [stdout_handler, stderr_handler]:
+            handler.setLevel(level)
+            handler.setFormatter(formatter)
+            logger.addHandler(handler)
 
         return logger
 
