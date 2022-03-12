@@ -1,11 +1,51 @@
 ## Docker commands used to build the application 
-# TODO: insert the docker build command
+docker build --tag Techtrends:v0.1.0 .
 
 ## Docker commands used to run the application
-# TODO: insert the docker run command
+docker run -p 3111:3111 --name techtrends techtrends:0.1.0
 
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+docker logs techtrends
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+* Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 172-064-138
+172.17.0.1 - - [27/Feb/2022 20:45:58] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:45:58] "GET /static/css/main.css HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:45:58] "GET /favicon.ico HTTP/1.1" 404 -
+INFO app 2022-02-27 20:46:03,337 An existing article is retrieved: 2020 CNCF Annual Report
+172.17.0.1 - - [27/Feb/2022 20:46:03] "GET /1 HTTP/1.1" 200 -
+INFO app 2022-02-27 20:46:10,373 The "About Us" page has been retrieved
+172.17.0.1 - - [27/Feb/2022 20:46:10] "GET /about HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:46:12] "GET /create HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:46:13] "POST /create HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:46:36] "POST /create HTTP/1.1" 200 -
+INFO app 2022-02-27 20:46:53,520 A new article is created: New entry
+172.17.0.1 - - [27/Feb/2022 20:46:53] "POST /create HTTP/1.1" 302 -
+172.17.0.1 - - [27/Feb/2022 20:46:53] "GET / HTTP/1.1" 200 -
+INFO app 2022-02-27 20:46:56,497 An existing article is retrieved: New entry
+172.17.0.1 - - [27/Feb/2022 20:46:56] "GET /7 HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:47:05] "GET /metrics HTTP/1.1" 200 -
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 172-064-138
+172.17.0.1 - - [27/Feb/2022 20:50:57] "GET /metrics HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:51:12] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:51:14] "GET /metrics HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:53:02] "GET /metrics HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:53:07] "GET / HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:53:07] "GET /static/css/main.css HTTP/1.1" 200 -
+172.17.0.1 - - [27/Feb/2022 20:53:07] "GET /favicon.ico HTTP/1.1" 404 -
