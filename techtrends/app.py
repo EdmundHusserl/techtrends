@@ -9,12 +9,19 @@ from flask import (
     redirect,
     flash,
 )
+from sys import (
+    stdout,
+    stderr
+)
 import uuid
 from werkzeug.exceptions import abort
 from middleware import AppLogger
 
 
-logger = AppLogger(name="app", level=DEBUG)
+
+logger = AppLogger(name="app", 
+                   level=DEBUG, 
+                   stream=[stdout, stderr])
 
 
 # Decorate db handlers to keep track 

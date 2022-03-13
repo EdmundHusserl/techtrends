@@ -4,10 +4,11 @@ from dataclasses import (
     dataclass,
     field
 )
-from sys import (
-    stdout, 
-    stderr
+from typing import (
+    List,
+    TextIO
 )
+
 
 @dataclass
 class AppLogger:
@@ -18,6 +19,7 @@ class AppLogger:
     """
     name: str
     level: int
+    stream: List[TextIO]
     post_count: int = 0
     db_connection_count: int = 0
     logger: logging.Logger = field(init=False)
@@ -28,15 +30,13 @@ class AppLogger:
     def create_logger(self, name: str, level: int = 10) -> logging.Logger:
         logger = logging.getLogger(name)
         logger.setLevel(level)
-
+        
         formatter = logging.Formatter(
             "%(name)s %(levelname)s %(asctime)s %(message)s"
         )
-        
-        stdout_handler = logging.StreamHandler(stdout)
-        stderr_handler = logging.StreamHandler(stderr)
-        
-        for handler in [stdout_handler, stderr_handler]:
+                
+        for s in self.stream:
+            handler = logging.StreamHandler(s)
             handler.setLevel(level)
             handler.setFormatter(formatter)
             logger.addHandler(handler)
